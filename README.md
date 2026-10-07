@@ -1,36 +1,124 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Nexus AI
 
-## Getting Started
+An AI Workspace for Knowledge, Memory, Agents and Workflows.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Vision
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Create a modern AI Workspace where users can:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Chat with AI
+- Chat with their documents
+- Build personal knowledge bases
+- Use intelligent agents
+- Create AI workflows
+- Visualize AI systems
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## Mission
 
-To learn more about Next.js, take a look at the following resources:
+The goal is not to create another ChatGPT clone.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The goal is to build a production-ready AI platform while learning:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- AI Engineering
+- RAG
+- Agents
+- Memory Systems
+- Workflows
+- Full Stack Architecture
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Learning Goals
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Learn AI Engineering from fundamentals
+- Understand LLMs deeply
+- Build real-world AI systems
+- Learn System Design
+- Write maintainable code
+- Follow industry best practices
+
+---
+
+## Project Rules
+
+- No Vibe Coding
+- Understand before implementing
+- Document everything
+- Architecture before coding
+- Clean Code over Fast Code
+
+---
+
+## Development Phases
+
+### Phase 1
+AI Chat Foundation
+
+### Phase 2
+Knowledge Base
+
+### Phase 3
+RAG System
+
+### Phase 4
+Memory System
+
+### Phase 5
+Agent System
+
+### Phase 6
+Multi-Agent Workflows
+
+### Phase 7
+3D AI Workspace
+
+---
+
+## Current Status
+
+Current Phase:
+Phase 1
+
+Current Task:
+Project Foundation
+
+Next Task:
+Repository Setup
+
+---
+
+## Tech Stack
+
+Frontend:
+- Next.js
+- TypeScript
+- Tailwind CSS
+
+Backend:
+- Node.js
+
+Database:
+- PostgreSQL
+
+Vector Database:
+- Qdrant
+
+AI:
+- OpenAI
+- Ollama
+
+Agent Framework:
+- LangGraph
+
+
+## Engineering Principles
+
+- YAGNI (You Aren't Gonna Need It)
+- Keep It Simple
+- Feature Driven Design
+- Clean Code
+- Documentation First
