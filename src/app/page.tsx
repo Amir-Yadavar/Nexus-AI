@@ -1,20 +1,42 @@
 "use client";
 import { useState } from "react";
 
+type MessageType = {
+  role: string;
+  content: string;
+};
+
 export default function Home() {
   const [inputUser, setInputUser] = useState("");
+  const [messages, setMessages] = useState<MessageType[]>([]);
 
   const handleSendMessage = async () => {
     if (inputUser.trim()) {
-      const res = await fetch("/api/chat", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      const newMessages = [
+        ...messages,
+        {
+          role: "user",
+          content: inputUser,
         },
-        body: JSON.stringify({ userMessage: inputUser }),
-      });
-      const data = await res.json();
-      console.log(data);
+      ];
+      setMessages(newMessages);
+      setInputUser("");
+      if (messages.length) {
+        const res = await fetch("/api/chat", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ messages: newMessages }),
+        });
+        const data = await res.json();
+        if (data?.success) {
+          setMessages([
+            ...messages,
+            { role: "assistant", content: data.message },
+          ]);
+        }
+      }
     }
   };
   return (

@@ -10,18 +10,13 @@ export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
 
-    const { userMessage } = body || {};
+    const { messages } = body ;
 
-    if (!userMessage?.trim()) {
-      return NextResponse.json({ message: "message is empty ..", status: 400 });
-    }
+    
 
     const completion = await client.chat.completions.create({
       model: "openrouter/free",
-      messages: [
-        { role: "system", content: "You are Nexus AI" },
-        { role: "user", content: userMessage },
-      ],
+   messages
     });
     return NextResponse.json({
       success: true,
