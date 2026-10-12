@@ -2,7 +2,7 @@
 import { useState } from "react";
 
 type MessageType = {
-  role: string;
+  role: "user" | "assistant" | "system";
   content: string;
 };
 
@@ -12,7 +12,7 @@ export default function Home() {
 
   const handleSendMessage = async () => {
     if (inputUser.trim()) {
-      const newMessages = [
+      const newMessages: MessageType[] = [
         ...messages,
         {
           role: "user",
@@ -21,7 +21,7 @@ export default function Home() {
       ];
       setMessages(newMessages);
       setInputUser("");
-      if (messages.length) {
+      if (newMessages.length) {
         const res = await fetch("/api/chat", {
           method: "POST",
           headers: {
@@ -31,11 +31,15 @@ export default function Home() {
         });
         const data = await res.json();
         if (data?.success) {
-          setMessages([
-            ...messages,
-            { role: "assistant", content: data.message },
+          setMessages((prev) => [
+            ...prev,
+            {
+              role: "assistant",
+              content: data.message,
+            },
           ]);
         }
+        console.log(data);
       }
     }
   };
