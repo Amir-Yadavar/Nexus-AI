@@ -1,4 +1,5 @@
 "use client";
+import ChatUI from "@/components/ui/chatUI/ChatUI";
 import { useState } from "react";
 
 type MessageType = {
@@ -51,6 +52,7 @@ export default function Home() {
         onChange={(e) => setInputUser(e.target.value)}
       />
       <button onClick={handleSendMessage}>send</button>
+      <ChatUI/>
     </div>
   );
 }
