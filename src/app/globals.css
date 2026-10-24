@@ -1,10 +1,20 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark,.dark *));
+
 :root{
   --bg:#ffffff;
   --text:#252422;
+  --primary:#242424;
+  --light-gray:#99a1af;
+  --mid-gray:#636260;
 }
 html.dark {
   --bg: #252422;
   --text: white;
+  
+}
+
+body{
+  background-color: var(--bg);
 }
