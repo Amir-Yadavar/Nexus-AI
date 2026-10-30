@@ -111,29 +111,74 @@ function ChatUI() {
               </div>
             </div>
           ) : (
-            <div className="absolute bottom-0 left-0 w-full p-4">
-              {/* input sec */}
-              <div className="flex justify-center items-center">
-                <div className="flex items-center p-2 rounded-3xl bg-gray-200 dark:bg-(--primary) border border-(--mid-gray) w-80 md:w-100 lg:w-150">
-                  <span className="px-2 text-2xl text-(--light-gray) cursor-pointer">
-                    <TiPlus />
-                  </span>
-                  <input
-                    type="text"
-                    placeholder="Message Nexus .."
-                    className="border-0 outline-0 p-2 w-full"
-                    value={inputUser}
-                    onChange={(e) => setInputUser(e.target.value)}
-                  />
-                  <span
-                    className="px-2 text-2xl text-(--light-gray) cursor-pointer"
-                    onClick={handleSendMessage}
-                  >
-                    <RiSendInsFill />
-                  </span>
+            <>
+              {/* content messages */}
+              <div className="flex-1 overflow-y-auto pb-32 pt-6">
+                <div className="mx-4 px-4 space-y-6">
+                  {messages.map((message, index) => {
+                    const isUser = message.role === "user";
+
+                    return (
+                      <div
+                        key={index}
+                        className={`flex ${
+                          isUser ? "justify-end" : "justify-start"
+                        }`}
+                      >
+                        <div
+                          className={`max-w-[85%] md:max-w-[75%] rounded-3xl px-4 py-3 shadow-sm wrap-break-word whitespace-pre-wrap
+              
+              ${
+                isUser
+                  ? "bg-blue-600 text-white rounded-br-md"
+                  : "bg-gray-200 dark:bg-(--primary) border border-(--mid-gray) rounded-bl-md"
+              }
+            `}
+                        >
+                          {!isUser && (
+                            <div
+                              className={`mb-1 text-xs font-semibold ${
+                                isUser ? "text-blue-100" : "text-(--light-gray)"
+                              }`}
+                            >
+                              {isUser ? "You" : "Nexus AI"}
+                            </div>
+                          )}
+
+                          <p className="leading-7 text-sm md:text-base">
+                            {message.content}
+                          </p>
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
-            </div>
+
+              <div className="absolute bottom-0 left-0 w-full p-4">
+                {/* input sec */}
+                <div className="flex justify-center items-center">
+                  <div className="flex items-center p-2 rounded-3xl bg-gray-200 dark:bg-(--primary) border border-(--mid-gray) w-80 md:w-100 lg:w-150">
+                    <span className="px-2 text-2xl text-(--light-gray) cursor-pointer">
+                      <TiPlus />
+                    </span>
+                    <input
+                      type="text"
+                      placeholder="Message Nexus .."
+                      className="border-0 outline-0 p-2 w-full"
+                      value={inputUser}
+                      onChange={(e) => setInputUser(e.target.value)}
+                    />
+                    <span
+                      className="px-2 text-2xl text-(--light-gray) cursor-pointer"
+                      onClick={handleSendMessage}
+                    >
+                      <RiSendInsFill />
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </>
           )}
         </div>
       </div>
