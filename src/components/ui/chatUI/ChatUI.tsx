@@ -1,6 +1,6 @@
 "use client";
 import { ThemeToggle } from "@/components/ThemeToggle/ThemeToggle";
-import { useState } from "react";
+import React, { useState } from "react";
 import { BsLayoutSidebar } from "react-icons/bs";
 import { HiBars3 } from "react-icons/hi2";
 import { RiSendInsFill } from "react-icons/ri";
@@ -16,37 +16,53 @@ function ChatUI() {
   const [inputUser, setInputUser] = useState("");
   const [messages, setMessages] = useState<MessageType[]>([]);
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const handleSendMessage = async () => {
-    if (inputUser.trim()) {
-      const newMessages: MessageType[] = [
-        ...messages,
-        {
-          role: "user",
-          content: inputUser,
-        },
-      ];
-      setMessages(newMessages);
-      setInputUser("");
-      if (newMessages.length) {
-        const res = await fetch("/api/chat", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
+    if (!inputUser.trim()) return
+    setIsLoading(true);
+    try {
+      if (inputUser.trim()) {
+        const newMessages: MessageType[] = [
+          ...messages,
+          {
+            role: "user",
+            content: inputUser,
           },
-          body: JSON.stringify({ messages: newMessages }),
-        });
-        const data = await res.json();
-        if (data?.success) {
-          setMessages((prev) => [
-            ...prev,
-            {
-              role: "assistant",
-              content: data.message,
+        ];
+        setMessages(newMessages);
+        setInputUser("");
+        if (newMessages.length) {
+          const res = await fetch("/api/chat", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
             },
-          ]);
+            body: JSON.stringify({ messages: newMessages }),
+          });
+          const data = await res.json();
+          if (data?.success) {
+            setMessages((prev) => [
+              ...prev,
+              {
+                role: "assistant",
+                content: data.message,
+              },
+            ]);
+          }
+          console.log(data);
         }
-        console.log(data);
       }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const enterClickHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      handleSendMessage();
     }
   };
 
@@ -99,6 +115,7 @@ function ChatUI() {
                       className="border-0 outline-0 p-2 w-full"
                       value={inputUser}
                       onChange={(e) => setInputUser(e.target.value)}
+                      onKeyDown={enterClickHandler}
                     />
                     <span
                       className="px-2 text-2xl text-(--light-gray) cursor-pointer"
@@ -152,6 +169,13 @@ function ChatUI() {
                       </div>
                     );
                   })}
+                  {isLoading && (
+                    <div className="flex justify-start">
+                      <div className="bg-gray-200 dark:bg-(--primary) border border-(--mid-gray) rounded-3xl rounded-bl-md px-4 py-3">
+                        Nexus AI is thinking...
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
 
