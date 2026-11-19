@@ -5,6 +5,7 @@ import ChatInput from "./ChatInput";
 import MessageList from "./MessageList";
 import { MessageType } from "@/types/chat";
 import Sidebar from "./Sidebar";
+import WelcomeSection from "./WelcomeSection";
 
 function ChatUI() {
   const [isAsideOpen, setIsAsideOpen] = useState(false);
@@ -85,9 +86,7 @@ function ChatUI() {
           {!messages.length ? (
             <div className="flex justify-center items-center w-full h-full">
               <div className="">
-                <h2 className="font-bold text-center text-3xl py-6 text-(--light-gray)">
-                  Hi, what can I help you with?
-                </h2>
+                <WelcomeSection />
                 <ChatInput
                   loading={isLoading}
                   onSend={handleSendMessage}
