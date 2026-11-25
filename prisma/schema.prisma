@@ -17,11 +17,13 @@ model User {
   email     String   @unique
   name      String
   createdAt DateTime @default(now())
+  conversation Conversation[]
 }
 
 model Conversation {
   id  String  @id  @default(uuid())
-  userId String User   
+  userId  String  
+  user  User  @relation((fields: [userId], references: [id]))
   title  String
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt 
